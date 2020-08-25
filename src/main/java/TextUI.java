@@ -31,8 +31,8 @@ public class TextUI
                             else
                             {
                                 System.out.printf("Circuit: %d input pins, %d output pins and %d gates\n\n",
-                                        logicSimulator.getIPinsSize(),
-                                        logicSimulator.getOPinsSize(),
+                                        logicSimulator.getInputPinsSize(),
+                                        logicSimulator.getOutputPinsSize(),
                                         logicSimulator.getCircuitsSize());
                             }
                             break;
@@ -43,7 +43,7 @@ public class TextUI
                                 Vector<Boolean> booleans = new Vector<>();
                                 boolean isZeroOne;
                                 int i = 1, num = 0;
-                                while (i <= logicSimulator.getIPinsSize()) {
+                                while (i <= logicSimulator.getInputPinsSize()) {
                                     isZeroOne = true;
                                     System.out.print("Please key in the value of input pin " + i + ": ");
                                     try {

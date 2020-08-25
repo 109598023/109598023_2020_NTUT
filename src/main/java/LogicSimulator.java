@@ -41,12 +41,12 @@ public class LogicSimulator
         return isLoad;
     }
 
-    public int getIPinsSize()
+    public int getInputPinsSize()
     {
         return iPins.size();
     }
 
-    public int getOPinsSize()
+    public int getOutputPinsSize()
     {
         return oPins.size();
     }

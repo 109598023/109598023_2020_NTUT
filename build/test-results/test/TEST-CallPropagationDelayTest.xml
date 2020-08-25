@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="CallPropagationDelayTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2020-08-25T03:56:07" hostname="DESKTOP-SET9F81" time="0.008">
-  <properties/>
-  <testcase name="testCallLaragestPropagationDelay" classname="CallPropagationDelayTest" time="0.006"/>
-  <testcase name="testCallPropagationDelayPolymorphism" classname="CallPropagationDelayTest" time="0.002"/>
-  <testcase name="testCallSmallesPropagationDelay" classname="CallPropagationDelayTest" time="0.0"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

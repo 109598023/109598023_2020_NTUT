@@ -18,6 +18,23 @@ public class LogicSimulatorTest
     }
 
     @Test
+    public void testLoad()
+    {
+        LogicSimulator logicSimulator = new LogicSimulator();
+
+        assertFalse(logicSimulator.load("FILE_NOT_EXIST"));
+        assertTrue(logicSimulator.load(file1Path));
+        assertEquals(3, logicSimulator.getInputPinsSize());
+        assertEquals(1, logicSimulator.getOutputPinsSize());
+        assertEquals(3, logicSimulator.getCircuitsSize());
+
+        assertTrue(logicSimulator.load(file2Path));
+        assertEquals(3, logicSimulator.getInputPinsSize());
+        assertEquals(2, logicSimulator.getOutputPinsSize());
+        assertEquals(5, logicSimulator.getCircuitsSize());
+    }
+
+    @Test
     public void testGetSimulationResult()
     {
         LogicSimulator logicSimulator = new LogicSimulator();
@@ -28,11 +45,23 @@ public class LogicSimulatorTest
         inputValues.add(false);
         inputValues.add(true);
         inputValues.add(true);
+
         assertEquals("Simulation Result:\n" +
                 "i i i | o\n" +
                 "1 2 3 | 1\n" +
                 "------+--\n" +
                 "0 1 1 | 0\n", logicSimulator.getSimulationResult(inputValues));
+
+        inputValues = new Vector<>();
+        inputValues.add(true);
+        inputValues.add(false);
+        inputValues.add(false);
+
+        assertEquals("Simulation Result:\n" +
+                "i i i | o\n" +
+                "1 2 3 | 1\n" +
+                "------+--\n" +
+                "1 0 0 | 1\n", logicSimulator.getSimulationResult(inputValues));
     }
 
     @Test
@@ -41,6 +70,7 @@ public class LogicSimulatorTest
         LogicSimulator logicSimulator = new LogicSimulator();
 
         logicSimulator.load(file1Path);
+
         assertEquals("Truth table:\n" +
                 "i i i | o\n" +
                 "1 2 3 | 1\n" +
@@ -53,32 +83,11 @@ public class LogicSimulatorTest
                 "1 0 1 | 1\n" +
                 "1 1 0 | 0\n" +
                 "1 1 1 | 0\n", logicSimulator.getTruthTable());
-    }
 
-    @Test
-    public void testGetSimulationResult2()
-    {
-        LogicSimulator logicSimulator = new LogicSimulator();
+        logicSimulator = new LogicSimulator();
 
         logicSimulator.load(file2Path);
 
-        Vector<Boolean> inputValues = new Vector<>();
-        inputValues.add(false);
-        inputValues.add(true);
-        inputValues.add(true);
-        assertEquals("Simulation Result:\n" +
-                "i i i | o o\n" +
-                "1 2 3 | 1 2\n" +
-                "------+----\n" +
-                "0 1 1 | 0 1\n", logicSimulator.getSimulationResult(inputValues));
-    }
-
-    @Test
-    public void testGetTruthTable2()
-    {
-        LogicSimulator logicSimulator = new LogicSimulator();
-
-        logicSimulator.load(file2Path);
         assertEquals("Truth table:\n" +
                 "i i i | o o\n" +
                 "1 2 3 | 1 2\n" +
