@@ -24,8 +24,16 @@ public class TextUI
             switch (scanner.nextLine()) {
                         case "1":
                             System.out.print("Please key in a file path: ");
-                            if (!logicSimulator.load(scanner.nextLine())) {
-                                System.out.println("File not found or file format error!!");
+                            if (!logicSimulator.load(scanner.nextLine()))
+                            {
+                                System.out.println("File not found or file format error!!\n");
+                            }
+                            else
+                            {
+                                System.out.printf("Circuit: %d input pins, %d output pins and %d gates\n\n",
+                                        logicSimulator.getIPinsSize(),
+                                        logicSimulator.getOPinsSize(),
+                                        logicSimulator.getCircuitsSize());
                             }
                             break;
                         case "2":

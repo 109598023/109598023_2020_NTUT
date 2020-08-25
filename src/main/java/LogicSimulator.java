@@ -46,6 +46,16 @@ public class LogicSimulator
         return iPins.size();
     }
 
+    public int getOPinsSize()
+    {
+        return oPins.size();
+    }
+
+    public int getCircuitsSize()
+    {
+        return circuits.size();
+    }
+
     private boolean buildCircuit(Vector<Vector<String>> circuitData, int iPinSize, int gateSize)
     {
         boolean buildResult = true;
