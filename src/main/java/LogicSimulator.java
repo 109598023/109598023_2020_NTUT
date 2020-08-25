@@ -27,10 +27,9 @@ public class LogicSimulator
             {
                 circuitData.add(new Vector<>(Arrays.asList(scanner.nextLine().split(" "))));
             }
-            buildIPins(iPinSize);
             load &= buildCircuit(circuitData, iPinSize, gateSize);
         }
-        catch (FileNotFoundException e) {
+        catch (NumberFormatException | FileNotFoundException e) {
             load = false;
         }
         isLoad = load;
@@ -50,48 +49,61 @@ public class LogicSimulator
     private boolean buildCircuit(Vector<Vector<String>> circuitData, int iPinSize, int gateSize)
     {
         boolean buildResult = true;
-        int[] useGateCount = new int[gateSize];
+        buildResult &= buildIPins(iPinSize);
         buildResult &= buildGates(circuitData, gateSize);
-        for (int i = 0; i < gateSize; i++)
+        if(buildResult)
         {
-            Vector<String> tmpData = circuitData.get(i);
-            for (int j = 1; j < tmpData.size() - 1; j++)
+            int[] useGateCount = new int[gateSize];
+            for (int i = 0; i < gateSize; i++)
             {
-                if (tmpData.get(j).contains("-"))
+                Vector<String> tmpData = circuitData.get(i);
+                for (int j = 1; j < tmpData.size() - 1; j++)
                 {
-                    int iPinsIndex = Math.abs(Integer.parseInt(tmpData.get(j))) - 1;
-                    circuits.get(i).addInputPin(iPins.get(iPinsIndex));
-                }
-                else
-                {
-                    String[] tmpSplits = tmpData.get(j).split("\\.");
-                    int circuitsIndex = Integer.parseInt(tmpSplits[0]) - 1;
-                    circuits.get(i).addInputPin(circuits.get(circuitsIndex));
-                    useGateCount[circuitsIndex] = 1;
+                    if (tmpData.get(j).contains("-"))
+                    {
+                        int iPinsIndex = Math.abs(Integer.parseInt(tmpData.get(j))) - 1;
+                        circuits.get(i).addInputPin(iPins.get(iPinsIndex));
+                    }
+                    else
+                    {
+                        String[] tmpSplits = tmpData.get(j).split("\\.");
+                        int circuitsIndex = Integer.parseInt(tmpSplits[0]) - 1;
+                        circuits.get(i).addInputPin(circuits.get(circuitsIndex));
+                        useGateCount[circuitsIndex] = 1;
+                    }
                 }
             }
-        }
-        for (int i = 0; i < gateSize; i++)
-        {
-            if (useGateCount[i] == 0)
+            for (int i = 0; i < gateSize; i++)
             {
-                oPins.add(circuits.get(i));
+                if (useGateCount[i] == 0)
+                {
+                    oPins.add(circuits.get(i));
+                }
             }
         }
         return buildResult;
     }
 
-    private void buildIPins(int iPinSize)
+    private boolean buildIPins(int iPinSize)
     {
+        if (iPinSize <= 0)
+        {
+            return false;
+        }
         for (int i = 0 ; i < iPinSize; i++)
         {
             iPins.add(new IPin());
         }
+        return true;
     }
 
     private boolean buildGates(Vector<Vector<String>> circuitData, int gateSize)
     {
         boolean buildResult = true;
+        if (gateSize <= 0)
+        {
+            return false;
+        }
         for (int i = 0; i < gateSize; i++)
         {
             switch (circuitData.get(i).get(0))
