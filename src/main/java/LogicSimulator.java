@@ -36,7 +36,7 @@ public class LogicSimulator
         return load;
     }
 
-    public boolean IsLoad()
+    public boolean isLoad()
     {
         return isLoad;
     }

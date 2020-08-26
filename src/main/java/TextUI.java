@@ -37,7 +37,7 @@ public class TextUI
                             }
                             break;
                         case "2":
-                            if (!logicSimulator.IsLoad()) {
+                            if (!logicSimulator.isLoad()) {
                                 System.out.println("Please load an lcf file, before using this operation.");
                             } else {
                                 Vector<Boolean> booleans = new Vector<>();
@@ -63,7 +63,7 @@ public class TextUI
                             }
                             break;
                         case "3":
-                            if (!logicSimulator.IsLoad()) {
+                            if (!logicSimulator.isLoad()) {
                                 System.out.println("Please load an lcf file, before using this operation.");
                             } else {
                                 System.out.print(logicSimulator.getTruthTable());
